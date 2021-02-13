@@ -15,12 +15,12 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
 
-    private Job(){
+    public Job(){
         id = nextId;
         nextId++;
     }
 
-    private Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
         this();
         this.name = name;
         this.employer = employer;
