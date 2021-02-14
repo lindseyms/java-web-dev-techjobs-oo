@@ -17,7 +17,7 @@ public class JobTest {
         job1 = new Job();
         job2 = new Job();
         job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        job4 = new Job(null, new Employer(), new Location(""), new PositionType(), new CoreCompetency());
+        job4 = new Job(null, new Employer(null), new Location(""), new PositionType(null), new CoreCompetency(null));
     }
 
     @Test
@@ -78,12 +78,22 @@ public class JobTest {
     }
 
     @Test
+    public void testJobToStringLocationIsNull() {
+        assertTrue(job4.toString().contains("Location: Data not available\n"));
+    }
+
+    @Test
+    public void testJobToStringReturnsPositionTypeLabelAndFieldIfNotNull(){
+        assertTrue(job3.toString().contains("Position Type: Quality control\n"));
+    }
+
+    @Test
     public void testJobToStringPositionTypeIsNull(){
         assertTrue(job4.toString().contains("Position Type: Data not available\n"));
     }
 
     @Test
-    public void testJobToStringReturnsPositionTypeLabelAndFieldIfNotNull(){
+    public void testJobToStringReturnsCoreCompetencyLabelAndFieldIfNotNull(){
         assertTrue(job3.toString().contains("Core Competency: Persistence\n"));
     }
 
