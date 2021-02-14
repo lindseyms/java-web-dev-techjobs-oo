@@ -1,5 +1,9 @@
 package org.launchcode.techjobs_oo;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Job {
 
     private int id;
@@ -18,6 +22,7 @@ public class Job {
     public Job(){
         id = nextId;
         nextId++;
+
     }
 
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency){
@@ -45,6 +50,28 @@ public class Job {
     @Override
     public int hashCode() {
         return id;
+    }
+
+    @Override
+    public String toString(){
+        String dataIsNull = "Data not available";
+        ArrayList<String> nullReplacedWithString = new ArrayList<>();
+        ArrayList<String> originalDataFromConstructor = new ArrayList<>();
+        Collections.addAll(originalDataFromConstructor, this.getName(), this.getEmployer().getValue(), this.getLocation().getValue(), this.getPositionType().getValue(), this.getCoreCompetency().getValue());
+
+        for(String value : originalDataFromConstructor){
+            if(value == null || value.isEmpty()){
+                nullReplacedWithString.add(dataIsNull);
+
+            }else{
+                nullReplacedWithString.add(value);
+            }
+
+        }
+
+        return String.format("\nID: %s\nName: %s\nEmployer: %s\nLocation: %s\nPosition Type: %s\nCore Competency: %s\n",
+                this.getId(),nullReplacedWithString.get(0), nullReplacedWithString.get(1), nullReplacedWithString.get(2),
+                nullReplacedWithString.get(3), nullReplacedWithString.get(4));
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID

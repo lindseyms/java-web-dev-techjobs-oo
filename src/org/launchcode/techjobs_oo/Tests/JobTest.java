@@ -1,23 +1,23 @@
 package org.launchcode.techjobs_oo.Tests;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.launchcode.techjobs_oo.*;
 
 import static org.junit.Assert.*;
 
 public class JobTest {
 
-    Job job1;
-    Job job2;
-    Job job3;
+    private static Job job1;
+    private static Job job2;
+    private static Job job3;
+    private static Job job4;
 
-    @Before
-    public void createJobObjects(){
+    @BeforeClass
+    public static void createJobObjects(){
         job1 = new Job();
         job2 = new Job();
         job3 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-
+        job4 = new Job(null, new Employer(), new Location(""), new PositionType(), new CoreCompetency());
     }
 
     @Test
@@ -46,5 +46,53 @@ public class JobTest {
     public void testJobsForEquality(){
         assertFalse(job1.equals(job2));
     }
+
+    @Test
+    public void testJobToStringReturnsCorrectIDLabelAndField(){
+        assertTrue(job3.toString().contains("\nID: 3\n"));
+    }
+
+    @Test
+    public void testJobToStringReturnsNameLabelAndFieldIfNotNull(){
+        assertTrue(job3.toString().contains("Name: Product tester\n"));
+    }
+
+    @Test
+    public void testJobToStringNameIsNull(){
+        assertTrue(job4.toString().contains("Name: Data not available\n"));
+    }
+
+    @Test
+    public void testJobToStringReturnsEmployerLabelAndFieldIfNotNull(){
+        assertTrue(job3.toString().contains("Employer: ACME\n"));
+    }
+
+    @Test
+    public void testJobToStringEmployerIsNull(){
+        assertTrue(job4.toString().contains("Employer: Data not available\n"));
+    }
+
+    @Test
+    public void testJobToStringReturnsLocationLabelAndFieldIfNotNull(){
+        assertTrue(job3.toString().contains("Location: Desert\n"));
+    }
+
+    @Test
+    public void testJobToStringPositionTypeIsNull(){
+        assertTrue(job4.toString().contains("Position Type: Data not available\n"));
+    }
+
+    @Test
+    public void testJobToStringReturnsPositionTypeLabelAndFieldIfNotNull(){
+        assertTrue(job3.toString().contains("Core Competency: Persistence\n"));
+    }
+
+    @Test
+    public void testJobToStringCoreCompetencyIsNull(){
+        assertTrue(job4.toString().contains("Core Competency: Data not available\n"));
+    }
+
+
+
 
 }
